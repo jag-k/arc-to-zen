@@ -1,0 +1,50 @@
+[project]
+name = "arc-to-zen"
+version = "0.1.0"
+description = "Local migration of Arc spaces, sidebar tabs and Boosts into Zen"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+arc-to-zen = "arc_to_zen.__main__:main"
+
+[dependency-groups]
+dev = [
+  "prek>=0.5.7",
+  "pytest>=9.1.1",
+  "ruff>=0.17.1",
+  "ssort>=0.17.0",
+  "twine>=7.0.0",
+  "ty>=0.0.90",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+markers = ["integration: explicitly enabled native Zen tests in isolated profiles"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B", "C4", "DTZ", "G", "LOG", "PIE", "PTH", "Q", "SIM", "TID", "PT", "RUF"]
+ignore = ["E501"]  # The formatter wraps code; embedded browser scripts stay readable.
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+
+[tool.ty.src]
+include = ["src", "tests", "import_arc.py"]
+
+[tool.uv.build-backend]
+source-include = ["CONTRIBUTING.md", "tests/**", "uv.lock", ".python-version", ".pre-commit-config.yaml", "*.command", "import_arc.py"]
+source-exclude = ["previews/**", "*.jsonlz4", "arc-to-zen-backups/**"]

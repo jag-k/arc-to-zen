@@ -1,0 +1,13 @@
+__pycache__/
+.venv/
+*.jsonlz4
+StorableSidebar.json
+arc-to-zen-state.json
+arc-to-zen-backups/
+previews/
+.pytest_cache/
+.ruff_cache/
+.ty_cache/
+dist/
+*.egg-info/
+.DS_Store
